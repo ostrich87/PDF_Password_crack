@@ -30,5 +30,11 @@ PDF문서의 맘호를 분실했을때, 즉 기억이 안나거나 모를때 암
 가장 간단한 것부터 복잡한순으로 체크해보는 것도 요령이겠다.
 
 파이썬은 인터프리터 언어로 실행(EXE) 파일로 전환시 파일 사이즈가 35GB를 초과하여 EXE File은
-업로드하지 못하였습니다. 
+업로드하지 못하였음.
+
+# EXE file Create (Windows CMD..)
+pyinstaller --noconfirm --onefile --windowed --icon "./pdf_pw_logo.ico" --add-data "./pdf_pw_logo.png;."  "./pdf_password_crack.py"
+=> "dist" Directory EXE File Create.
+
+
 
