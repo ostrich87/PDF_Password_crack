@@ -12,7 +12,7 @@ from tkinter.scrolledtext import ScrolledText
 import tkinter.font
 import time
 import os
-import webbrowser
+# import webbrowser
 # import pkg_resources.py2_warn
 
 
@@ -31,9 +31,20 @@ def help_file() : # 메세지박스 띄우기
                                 "                                                  Date : 12/28/2022\n" +
                                 "                                                  jyh4ever@gmail.com\n\n\n\n")                                
  
-def edge_browser() :
-    webbrowser.open('www.google.co.kr')
-    return True  
+def Precautions() :
+    messagebox.showinfo("Precautions", "\nLet's keep the password.\n\n"+
+                                "When setting a password,   \n"+
+                                "if you set more than 8 characters with a combination of \n"+
+                                "numbers, letters, and special characters,\n\n"+
+                                "There are many combinations of cases,\n"+
+                                "so it is not easy because it takes a lot of time even for\n"+
+                                "a computer with good performance. \n"+
+                                "(Wouldn't it be better to use a super computer?)\n\n" +
+                                "Let's protect passwords, which are considered more important\n" +
+                                "than anything else in the digital age, when possible.\n\n" +
+                                "                                                  let's be careful\n\n\n\n") 
+    # webbrowser.open('www.google.co.kr')
+    # return True  
     
 def func_exit() : # func_exit 함수 선언 
     window.quit() 
@@ -94,7 +105,8 @@ def ok_function_tab1():
     public_cancel = False
     error_msg_clear(1) 
 
-    q_result =messagebox.askokcancel("확인/취소","작업을 진행하시겠습니까?")
+    q_result =messagebox.askokcancel("Confirm/Cancel","Would you like to proceed?")
+
     if (q_result == True) : 
         validity_check_fun(1)  # 유효성 검사 메세지 
         find_length_min_tab1 = entry_length_min_tab1.get()
@@ -110,9 +122,8 @@ def ok_function_tab1():
         result_value = 0
         if (find_name_tab1 == None or find_name_tab1 == '' ) : 
             result_value = 1 
-            #print('tab1 ERROR OK char_varify: ',char_varify,'-',find_name_tab1,'-','-') 
             error_file_exists(1)
-        if (varify_min_max(1,char_varify,int(find_length_min_tab1),int(find_length_max_tab1)) == False) : 
+        if (varify_min_max(1,char_varify,int(find_length_min_tab1),int(find_length_max_tab1)) == False) :   
             result_value = 1  
             error_display_length(1)
         if (varify_num(find_number_tab1) == False) :   # 문자(숫자) 입력 체크
@@ -149,16 +160,14 @@ def ok_function_tab2():
     result_value = 0
     
     error_msg_clear(2) 
-    q_result =messagebox.askokcancel("확인/취소","작업을 진행하시겠습니까?")
+    q_result =messagebox.askokcancel("Confirm/Cancel","Would you like to proceed?")
     if (q_result == True) :  
         # find 실행  text file을 읽음
         if (find_name_tab2 == None or find_name_tab2 == '' ) :                                 # pdf 파일 체크
             result_value = 1 
-            #print('tab2 pdf ERROR  ',find_name_tab2,'-','-')  # 없으면 ERROR 표시
             error_file_exists(2)
         if (find_type_var_tab2.get() == 1) and (find_text_tab2 == None or find_text_tab2 == '' ) :   # TEXT 파일 체크
             result_value = 1 
-            #print('tab2 TEXT  ERROR  ',find_text_tab2,'-','-')  # 없으면 ERROR 표시
             error_file_exists(2)
         if (find_type_var_tab2.get() == 2) :   
             text_area.bind()      #scrolledtext 값을 세팅
@@ -220,7 +229,6 @@ def ok_function_tab2():
                     p_var.set(chars_case_num_count)          # progress 진행값
                     progressbar.update()  # ui없데이트
                         
-                    #print('tab2 OK INPUT char_varify: ',char_varify,'-',find_name_tab2,'-',chars_case_num_count,'-',chars_case_num_total)
                     if(text_i != '' or text_i == None) :  
                         result_value = result_confirm_func_tab2(2,char_varify) 
                         if result_value == 1 : 
@@ -244,7 +252,7 @@ def ok_function_tab3():
 
     public_cancel = False
     error_msg_clear(3) 
-    q_result =messagebox.askokcancel("확인/취소","작업을 진행하시겠습니까?")
+    q_result =messagebox.askokcancel("Confirm/Cancel","Would you like to proceed?")
     if (q_result == True) :  
         validity_check_fun(3)  # 유효성 검사 메세지
         find_length_min_tab3 = entry_length_min_tab3.get()
@@ -258,8 +266,7 @@ def ok_function_tab3():
         char_varify = chars_create(find_number_tab3,find_string_tab3,find_special_tab3,find_type_var_tab3.get(),int(find_length_max_tab3))
         result_value = 0
         if (find_name_tab3 == None or find_name_tab3 == '' ) : 
-            result_value = 1 
-            #print('tab3 ERROR OK char_varify: ',char_varify,'-',find_name_tab3,'-','-') 
+            result_value = 1  
             error_file_exists(3)
         if (varify_min_max(3,char_varify,int(find_length_min_tab3),int(find_length_max_tab3)) == False) :  
             result_value = 1  
@@ -423,15 +430,19 @@ def Non_active_check() :
     if (find_type_var_tab2.get() == 1) :  # Text File 선택
         Select_button_tab2 = Button(tab2, text= " Select file ",state = NORMAL,command=text_find_fun_tab2)   
         Select_button_tab2.place(x=520, y=80)
+        # Input Clear button
         clear_button_tab2 = Button(tab2, text= " Input clear ",padx=0, pady=2,state = DISABLED,command=input_clear_fun_tab2,font=font8)  
         clear_button_tab2.place(x=520, y=120)
+        # text file save button 
         textsave_button_tab2 = Button(tab2, text= "TextFileSave ",padx=0, pady=1,state = DISABLED,command=textsave_fun_tab2,font=font8)
         textsave_button_tab2.place(x=520, y=150)
     elif(find_type_var_tab2.get() == 2) :  # INPUT DATA 선택
         Select_button_tab2 = Button(tab2, text= " Select file ",state = DISABLED,command=text_find_fun_tab2)   
         Select_button_tab2.place(x=520, y=80)
+        # Input Clear button
         clear_button_tab2 = Button(tab2, text= " Input Clear ",padx=0, pady=2,state = NORMAL,command=input_clear_fun_tab2,font=font8)  
         clear_button_tab2.place(x=520, y=120)
+        # text file save button 
         textsave_button_tab2 = Button(tab2, text= "TextFileSave ",padx=0, pady=1,state = NORMAL,command=textsave_fun_tab2,font=font8)
         textsave_button_tab2.place(x=520, y=150)
 
@@ -467,18 +478,15 @@ def textsave_fun_tab2() :
     lb_hi.place(x=520,y=175)
 
     if (window.txt_filename != '' and window.txt_filename != None) :  
-        #print('text save as filename :',window.txt_filename)    
         Text_file = open(window.txt_filename,"w")   # scroll 위젯값을 파일로 보냅니다.
         for text_i in text_array:
             if(text_i != '' or text_i == None) :
                 Text_file.write(text_i+'\n')
-                #print('write-----',text_i)
         Text_file.close()
     return
 
-# 찾고자하는 패스워드 길이 최소 ~ 최대   2 ~ 6  입력된 문자길이는 최소 숫자보다는 길어야 한다.
+
 def varify_min_max(tab_value,chars_v,find_len_min,find_len_max) :   # tab 1, 3
-    #tab1  min 2-6 , tab3 min 2-6
     if ((tab_value == 1) and 
        (0 > find_len_min or find_len_min > find_len_max)) :
         return False
@@ -528,7 +536,6 @@ def varify_char(find_str,find_tvar) :   # tvar 1 그대로 2 소문자 , 3 대�
 def varify_special(find_spe) :   # tvar 1 소문자 , 2 대문자 , 3 둘다
     var_flag = 0
     for vi in range(0,len(find_spe)) :   
-        #print(vi,'-',find_spe[vi])
         if ('!' == find_spe[vi] or '#' == find_spe[vi] or '$' == find_spe[vi] or '%' == find_spe[vi] or
             '^' == find_spe[vi] or '&' == find_spe[vi] or '*' == find_spe[vi] or '(' == find_spe[vi] or
             ')' == find_spe[vi] or '+' == find_spe[vi] or '-' == find_spe[vi] or '=' == find_spe[vi] or
@@ -541,7 +548,7 @@ def varify_special(find_spe) :   # tvar 1 소문자 , 2 대문자 , 3 둘다
         else :
             var_flag = 1
             break
-
+        
     if (var_flag == 1) :   
         return False
     else :   
@@ -602,6 +609,7 @@ def chars_create(c_find_number,c_find_string,c_find_special,c_find_var,c_find_ma
     chars_cre = ''
     if ( c_find_number != '') :   
         chars_cre = c_find_number
+
     if ( c_find_string != '' and c_find_var == 1) :   
         chars_cre = chars_cre + c_find_string
     elif ( c_find_string != '' and c_find_var == 2) :   
@@ -614,9 +622,7 @@ def chars_create(c_find_number,c_find_string,c_find_special,c_find_var,c_find_ma
     if (c_find_special != '') :   
         chars_cre = chars_cre + c_find_special
 
-  
     chars_cre = ''.join(set(chars_cre))  # set로 변환 후 join 함수사용 중복문자 제거 순서 보정 없음 순저보정시 dict.fromkeys(word) 
-    
     return chars_cre
 
 #백분율 소숫점 3자리까지 문자열 
@@ -671,11 +677,14 @@ def result_confirm_func(tab_value,r_find_length_min,r_find_length_max,chars) :
     global find_name_tab3
     global display_cycle_value
 
-    find_name = ''   
+    find_name = ''
+    #find_type_var = 1     
     if (tab_value == 1):   
         find_name = find_name_tab1    # tab1에서 왔음
+        #find_type_var = find_type_var_tab1
     elif (tab_value == 3) :   
         find_name = find_name_tab3    # tab3에서 왔음
+        #find_type_var = find_type_var_tab3
 
     public_cancel = False
 
@@ -685,6 +694,7 @@ def result_confirm_func(tab_value,r_find_length_min,r_find_length_max,chars) :
         count_allpass = product(chars,repeat=t_i)  
         chars_case_num = chars_case_num+ len(list(count_allpass))
 
+    #lb_hi = Label(tab1, text="Preparing and calculating processing time...............", fg='blue',width=48, height=1, justify=[RIGHT])
     if (tab_value == 1):
         lb_hi = Label(tab1, text="Number of cases MAX : "+str(format(chars_case_num,',')), fg='blue',width=48, height=1, justify=[LEFT])
         lb_hi.place(x=150,y=390)
@@ -724,7 +734,7 @@ def result_confirm_func(tab_value,r_find_length_min,r_find_length_max,chars) :
                     progressbar.place(x=150,y=305)
                     p_var.set(chars_case_num_count)          # progress 진행값
                     progressbar.update()  # ui없데이트
-                 
+            
             if (public_cancel == True) :   
                 success_flag = 2   #  진행 취소
                 break
@@ -795,7 +805,6 @@ def file_password_check2(tab_value) :
         find_name = find_name_tab2    # tab2에서 왔음
     elif (tab_value == 3) :   
         find_name = find_name_tab3    # tab3에서 왔음
-
     flag_check = True
     try:   
         pikepdf.open(find_name, password = "2")  #pdf
@@ -832,8 +841,8 @@ menu = Menu(window)
 
 # MENU 메뉴
 menu_file = Menu(menu, tearoff=0)
-menu_file.add_command(label=" HELP ", command=help_file,font=font10)  
-menu_file.add_command(label=" SITE ", command=edge_browser,font=font10) 
+menu_file.add_command(label=" H E L P ", command=help_file,font=font10)  
+menu_file.add_command(label=" N o t e ", command=Precautions,font=font10) 
 menu_file.add_separator()                                      # 메뉴 구분선
 menu_file.add_command(label=" Exit ",command=func_exit,font=font10)
 menu.add_cascade(label="MENU",menu=menu_file,font=font10)                  # 메뉴 UI
@@ -873,14 +882,14 @@ lb_hi = Label(tab1, text="Password Length", bg='gray93', fg='gray1',width=15, he
 lb_hi.place(x=30,y=80)
 
 entry_length_min_tab1 = tk.Entry(tab1,bg="gray94", fg="gray1",  width=50, relief="ridge") # relief = "flat", "groove", "raised", "ridge", "solid", "sunken"
-find_length_min_tab1=2            # 길이 최소값
+find_length_min_tab1=2      
 entry_length_min_tab1.insert(0,find_length_min_tab1)
 entry_length_min_tab1.pack(side=tk.LEFT,padx=10,pady=5)
 entry_length_min_tab1.place(x=150,y=80,width=70,height=30)
 lb_hi = Label(tab1, text=" ~ ", bg='gray93', fg='gray1',width=5, height=1,padx=5, pady=5, justify=[CENTER])
 lb_hi.place(x=220,y=80)
 entry_length_max_tab1 = tk.Entry(tab1,bg="gray94", fg="gray1", width=50, relief="ridge") # relief = "flat", "groove", "raised", "ridge", "solid", "sunken"
-find_length_max_tab1=6                # 길이 최대 값
+find_length_max_tab1=6        
 entry_length_max_tab1.insert(1,find_length_max_tab1)
 entry_length_max_tab1.pack(side=tk.LEFT,padx=10,pady=5)
 entry_length_max_tab1.place(x=270,y=80,width=70,height=30)
@@ -952,9 +961,9 @@ password_found_display(1,'')
 error_msg_clear(1)
 
 # Start and Cancel Button
-comfirm_button1 = Button(tab1, text= "  확 인  ",command=ok_function_tab1)
+comfirm_button1 = Button(tab1, text= " Confirm ",command=ok_function_tab1)
 comfirm_button1.place(x=450, y=420)
-comfirm_button2 = Button(tab1, text= "  취 소  ",command=cancel_function)
+comfirm_button2 = Button(tab1, text= "  Cancel ",command=cancel_function)
 comfirm_button2.place(x=520, y=420)
 
 # tab2 GUI ================================================================================================
@@ -963,8 +972,6 @@ lb_hi = Label(tab2, text=" PDF  Destination ", bg='gray93', fg='gray1',width=15,
 lb_hi.place(x=30,y=40)
 lb_hi = Label(tab2, text=find_name_tab2, fg="gray1", bg="gray96", width=48,height=1,padx=5, pady=5,justify=[RIGHT])  # 파일명
 lb_hi.place(x=150,y=40)
-
-#print('tab 2 before button 대상 파일 : ',find_name_tab1,'-',find_name_tab2,'-',find_name_tab3)
 
 Select_button_tab2 = Button(tab2, text= " Select file ",command=file_find_fun_tab2)   # File Search Function 기능 구현
 Select_button_tab2.place(x=520, y=40)
@@ -1021,9 +1028,9 @@ password_found_display(2,'')
 error_msg_clear(2)
 
 # Start and Cancel Button
-comfirm_button1 = Button(tab2, text= "  확 인  ",command=ok_function_tab2)
+comfirm_button1 = Button(tab2, text= " Confirm ",command=ok_function_tab2)
 comfirm_button1.place(x=450, y=420)
-comfirm_button2 = Button(tab2, text= "  취 소  ",command=cancel_function)
+comfirm_button2 = Button(tab2, text= " Cancel  ",command=cancel_function)
 comfirm_button2.place(x=520, y=420)
 
 
@@ -1036,20 +1043,20 @@ lb_hi.place(x=150,y=40)
 
 Select_button_tab3 = Button(tab3, text= " Select file ",command=file_find_fun_tab3)   # File Search Function 기능 구현
 Select_button_tab3.place(x=520, y=40)
- 
+  
 # Password Length  입력
 lb_hi = Label(tab3, text="Password Length", bg='gray93', fg='gray1',width=15, height=1,padx=5, pady=5, justify=[RIGHT])
 lb_hi.place(x=30,y=80)
 
 entry_length_min_tab3 = tk.Entry(tab3,bg="gray94", fg="gray1",  width=50, relief="ridge") # relief = "flat", "groove", "raised", "ridge", "solid", "sunken"
-find_length_min_tab3=2                # 길이 최소값 4
+find_length_min_tab3=2           
 entry_length_min_tab3.insert(0,find_length_min_tab3)
 entry_length_min_tab3.pack(side=tk.LEFT,padx=10,pady=5)
 entry_length_min_tab3.place(x=150,y=80,width=70,height=30)
 lb_hi = Label(tab3, text=" ~ ", bg='gray93', fg='gray1',width=5, height=1,padx=5, pady=5, justify=[CENTER])
 lb_hi.place(x=220,y=80)
 entry_length_max_tab3 = tk.Entry(tab3,bg="gray94", fg="gray1", width=50, relief="ridge") # relief = "flat", "groove", "raised", "ridge", "solid", "sunken"
-find_length_max_tab3=6                # 길이 최대 값  Max = 10
+find_length_max_tab3=6          
 entry_length_max_tab3.insert(1,find_length_max_tab3)
 entry_length_max_tab3.pack(side=tk.LEFT,padx=10,pady=5)
 entry_length_max_tab3.place(x=270,y=80,width=70,height=30)
@@ -1121,9 +1128,9 @@ password_found_display(3,'')
 error_msg_clear(3)
 
 # Start and Cancel Button
-comfirm_button1 = Button(tab3, text= "  확 인  ",command=ok_function_tab3)
+comfirm_button1 = Button(tab3, text= " Confirm ",command=ok_function_tab3)
 comfirm_button1.place(x=450, y=420)
-comfirm_button2 = Button(tab3, text= "  취 소  ",command=cancel_function)
+comfirm_button2 = Button(tab3, text= " Cancel  ",command=cancel_function)
 comfirm_button2.place(x=520, y=420)
 
 
