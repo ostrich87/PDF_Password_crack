@@ -45,12 +45,10 @@ def file_find_fun_tab1():
     dis_file = ''
     cur_dir = os.getcwd()   # 현재 Director
     window.filename = filedialog.askopenfilename(initialdir = cur_dir,title = "choose your file",filetypes = (("pdf files","*.pdf"),("pdf files","*.pdf")))
-    #print ('tab 1 대상파일 명 file_find : ', window.filename)
     dis_file = os.path.basename(window.filename)  # 파일명만 추출
     find_name_tab1 = window.filename 
     lb_hi = Label(tab1, text=dis_file, bg='gray96', fg='gray1',width=0,padx=5, pady=5,justify=[RIGHT])
     lb_hi.place(x=150,y=40)
-    #print('tab 1 file_find after  :',find_name_tab1, '-',  type(find_name_tab1),'=',dis_file,'-')
     return
 
 def file_find_fun_tab2():
@@ -59,12 +57,10 @@ def file_find_fun_tab2():
     cur_dir = os.getcwd()   # 현재 Director
     window.filename = filedialog.askopenfilename(initialdir = cur_dir,
                       title = "choose your file",filetypes = (("pdf files","*.pdf"),("pdf files","*.pdf")))
-    #print ('tab 2 대상파일 명 file_find : ', window.filename)
     dis_file = os.path.basename(window.filename)  # 파일명만 추출
     find_name_tab2 = window.filename 
     lb_hi = Label(tab2, text=dis_file, bg='gray96', fg='gray1',width=0,padx=5, pady=5,justify=[RIGHT])
     lb_hi.place(x=150,y=40)
-    #print('tab 2 file_find after  :',find_name_tab2, '-',  type(find_name_tab2),'=',dis_file,'-')
     return
 
 def text_find_fun_tab2():
@@ -73,12 +69,10 @@ def text_find_fun_tab2():
     cur_dir = os.getcwd()   # 현재 Director
     window.filename = filedialog.askopenfilename(initialdir = cur_dir,
                       title = "choose your file",filetypes = (("Text files", "*.txt"),("all files", "*.*")))
-    #print ('tab 2 TEXT 대상파일 명 file_find : ', window.filename)
     dis_file = os.path.basename(window.filename)  # 파일명만 추출
     find_text_tab2 = window.filename 
     lb_hi = Label(tab2, text=dis_file, bg='gray96', fg='gray1',width=0,padx=5, pady=5,justify=[RIGHT])
     lb_hi.place(x=150,y=80)
-    #print('tab 2 TEXT file_find after  :',find_text_tab2, '-',  type(find_text_tab2),'=',dis_file,'-')
     return
 
 def file_find_fun_tab3():
@@ -87,12 +81,10 @@ def file_find_fun_tab3():
     cur_dir = os.getcwd()   # 현재 Director
     window.filename = filedialog.askopenfilename(initialdir = cur_dir,
                       title = "choose your file",filetypes = (("pdf files","*.pdf"),("pdf files","*.pdf")))
-    #print ('tab 3 대상파일 명 file_find : ', window.filename)
     dis_file = os.path.basename(window.filename)  # 파일명만 추출
     find_name_tab3 = window.filename 
     lb_hi = Label(tab3, text=dis_file, bg='gray96', fg='gray1',width=0,padx=5, pady=5,justify=[RIGHT])
     lb_hi.place(x=150,y=40)
-    #print('tab 3file_find after  :',find_name_tab3, '-',  type(find_name_tab3),'=',dis_file,'-')
     return
 
 def ok_function_tab1(): 
@@ -103,7 +95,6 @@ def ok_function_tab1():
     error_msg_clear(1) 
 
     q_result =messagebox.askokcancel("확인/취소","작업을 진행하시겠습니까?")
-    #print('tab1 ok_function', q_result ,'-')
     if (q_result == True) : 
         validity_check_fun(1)  # 유효성 검사 메세지 
         find_length_min_tab1 = entry_length_min_tab1.get()
@@ -114,21 +105,14 @@ def ok_function_tab1():
         else :   
             find_string_tab1 = ''
         find_special_tab1 = entry_special_tab1.get()
-        #print('tab1 Before - f-name:',find_name_tab1,' Min:',find_length_min_tab1,' Max:',find_length_max_tab1,' Num:',find_number_tab1,' Str:',find_string_tab1,' type:',find_type_var_tab1.get(),' Special:',find_special_tab1)
         char_varify = chars_create(find_number_tab1,find_string_tab1,find_special_tab1,find_type_var_tab1.get(),int(find_length_max_tab1))
-        #print('tab1 OK char_varify: ',char_varify,'-',find_name_tab1,'-',type(find_name_tab1),'-')
-
-        # print("find_length_min_tab1", find_length_min_tab1, "-----")
-        # print("find_length_max_tab1", find_length_max_tab1, "-----")
-        # print("find_number_tab1",find_number_tab1,"-----",str(type(find_number_tab1)))
-        # print('chars_create--',char_varify,find_number_tab1,find_string_tab1,find_special_tab1)
 
         result_value = 0
         if (find_name_tab1 == None or find_name_tab1 == '' ) : 
             result_value = 1 
             #print('tab1 ERROR OK char_varify: ',char_varify,'-',find_name_tab1,'-','-') 
             error_file_exists(1)
-        if (varify_min_max(1,char_varify,int(find_length_min_tab1),int(find_length_max_tab1)) == False) :   # 길이 최소 4 ~ 최대값 10 체크
+        if (varify_min_max(1,char_varify,int(find_length_min_tab1),int(find_length_max_tab1)) == False) : 
             result_value = 1  
             error_display_length(1)
         if (varify_num(find_number_tab1) == False) :   # 문자(숫자) 입력 체크
@@ -149,7 +133,6 @@ def ok_function_tab1():
             result_value = 5
             error_display_password_input(1)
 
-        # print("result_value = ",result_value,'NUM--',find_number_tab1,'STR--',find_string_tab1,'SPE--',find_special_tab1)
         if (result_value == 0) :    # ERROR 없으면 실행
             if (file_password_check1(1) == True) and (file_password_check2(1) == True) :   # 암호가 걸렸는지 체크
                 password_check_display(1)  # 암호가 안걸려 있음 표시
@@ -167,7 +150,6 @@ def ok_function_tab2():
     
     error_msg_clear(2) 
     q_result =messagebox.askokcancel("확인/취소","작업을 진행하시겠습니까?")
-    #print('tab2 ok_function', q_result ,'-')
     if (q_result == True) :  
         # find 실행  text file을 읽음
         if (find_name_tab2 == None or find_name_tab2 == '' ) :                                 # pdf 파일 체크
@@ -184,11 +166,8 @@ def ok_function_tab2():
             text_array = text_tmp.split('\n')
             if (text_tmp == None or text_tmp == '' ) :   # TEXT 파일 체크
                 result_value = 1 
-                #print('tab2 TEXT INPUT  ERROR  ',text_array,'-','-')  # 없으면 ERROR 표시
                 error_input_data_exists(2)
 
-        # with open("C:/Users/82105/Desktop/pythonWorkspace/password.txt", mode="r") as file :
-        #chars_case_num_total = 0 
         if (find_type_var_tab2.get() == 1) and (result_value == 0) :   
             with open(find_text_tab2, mode="rt") as file : 
                 if (file_password_check1(2) == True) and (file_password_check2(2) == True) :   # 암호가 걸렸는지 체크
@@ -210,8 +189,6 @@ def ok_function_tab2():
                         progressbar.place(x=150,y=305)
                         p_var.set(chars_case_num_count)          # progress 진행값
                         progressbar.update()  # ui없데이트
-                            
-                        #print('tab2 OK TEXT_File char_varify: ',char_varify,'-',find_name_tab2,'-',chars_case_num_count,'-',chars_case_num_total)
 
                         if (char_varify != '') :   # TEXT 파일의 라인에 값이 없으면 PASS   
                             result_value = result_confirm_func_tab2(2,char_varify) 
@@ -268,7 +245,6 @@ def ok_function_tab3():
     public_cancel = False
     error_msg_clear(3) 
     q_result =messagebox.askokcancel("확인/취소","작업을 진행하시겠습니까?")
-    #print('tab3 ok_function 3', q_result ,'-')
     if (q_result == True) :  
         validity_check_fun(3)  # 유효성 검사 메세지
         find_length_min_tab3 = entry_length_min_tab3.get()
@@ -279,15 +255,13 @@ def ok_function_tab3():
         else :   
             find_string_tab3 = ''
         find_special_tab3 = entry_special_tab3.get()
-        #print('tab3 Before - f-name:',find_name_tab3,' Min:',find_length_min_tab3,' Max:',find_length_max_tab3,' Num:',find_number_tab3,' Str:',find_string_tab3,' type:',find_type_var_tab3.get(),' Special:',find_special_tab3)
         char_varify = chars_create(find_number_tab3,find_string_tab3,find_special_tab3,find_type_var_tab3.get(),int(find_length_max_tab3))
-        #print('tab3 OK char_varify: ',char_varify,'-',find_name_tab3,'-',type(find_name_tab3),'-')
         result_value = 0
         if (find_name_tab3 == None or find_name_tab3 == '' ) : 
             result_value = 1 
             #print('tab3 ERROR OK char_varify: ',char_varify,'-',find_name_tab3,'-','-') 
             error_file_exists(3)
-        if (varify_min_max(3,char_varify,int(find_length_min_tab3),int(find_length_max_tab3)) == False) :   # 길이 최소 4 ~ 최대값 10 체크
+        if (varify_min_max(3,char_varify,int(find_length_min_tab3),int(find_length_max_tab3)) == False) :  
             result_value = 1  
             error_display_length(3)
         if (varify_num(find_number_tab3) == False) :   # 문자(숫자) 입력 체크
@@ -449,25 +423,15 @@ def Non_active_check() :
     if (find_type_var_tab2.get() == 1) :  # Text File 선택
         Select_button_tab2 = Button(tab2, text= " Select file ",state = NORMAL,command=text_find_fun_tab2)   
         Select_button_tab2.place(x=520, y=80)
-        #text_area=ScrolledText(tab2,width=48,height=9,x=150,y=120,bg='gray91',padx=5, pady=5,state=DISABLED)
-        #text_area.place(x=150,y=120)
-        #text_area.focus_set()
-        # Input Clear button
         clear_button_tab2 = Button(tab2, text= " Input clear ",padx=0, pady=2,state = DISABLED,command=input_clear_fun_tab2,font=font8)  
         clear_button_tab2.place(x=520, y=120)
-        # text file save button 
         textsave_button_tab2 = Button(tab2, text= "TextFileSave ",padx=0, pady=1,state = DISABLED,command=textsave_fun_tab2,font=font8)
         textsave_button_tab2.place(x=520, y=150)
     elif(find_type_var_tab2.get() == 2) :  # INPUT DATA 선택
         Select_button_tab2 = Button(tab2, text= " Select file ",state = DISABLED,command=text_find_fun_tab2)   
         Select_button_tab2.place(x=520, y=80)
-        #text_area=ScrolledText(tab2,width=48,height=9,x=150,y=120,bg='gray91',padx=5, pady=5,state=NORMAL)
-        #text_area.place(x=150,y=120)
-        #text_area.focus_set()
-        # Input Clear button
         clear_button_tab2 = Button(tab2, text= " Input Clear ",padx=0, pady=2,state = NORMAL,command=input_clear_fun_tab2,font=font8)  
         clear_button_tab2.place(x=520, y=120)
-        # text file save button 
         textsave_button_tab2 = Button(tab2, text= "TextFileSave ",padx=0, pady=1,state = NORMAL,command=textsave_fun_tab2,font=font8)
         textsave_button_tab2.place(x=520, y=150)
 
@@ -492,9 +456,7 @@ def textsave_fun_tab2() :
     text_tmp   = text_area.get(1.0,'end')
     text_array = text_tmp.split('\n')
     text_name_select = ''.join(text_tmp).replace('\n','')
-    #print('textsave_fun_tab2()',text_name_select,'-',text_tmp,'-',text_array)
     if (text_name_select == '' or text_name_select == None) :   # input data exists check
-        #print('tab2 TEXT INPUT  ERROR  ',text_array,'-','-')  # 없으면 ERROR 표시
         error_input_data_exists(2)
         return
 
@@ -503,7 +465,6 @@ def textsave_fun_tab2() :
     dis_textfile = os.path.basename(window.txt_filename)  # 파일명만 추출
     lb_hi = Label(tab2, text=dis_textfile,fg='blue',width=0,justify=[RIGHT])
     lb_hi.place(x=520,y=175)
-    #print('tab 2 save text file   :',window.txt_filename, '-',  type(find_name_tab1),'=',dis_textfile,'-')
 
     if (window.txt_filename != '' and window.txt_filename != None) :  
         #print('text save as filename :',window.txt_filename)    
@@ -520,24 +481,12 @@ def varify_min_max(tab_value,chars_v,find_len_min,find_len_max) :   # tab 1, 3
     #tab1  min 2-6 , tab3 min 2-6
     if ((tab_value == 1) and 
        (0 > find_len_min or find_len_min > find_len_max)) :
-        #print('tab 1',tab_value,len(chars_v), find_len_min, find_len_max)
         return False
     elif ((tab_value == 3) and 
           (0 > find_len_min or find_len_min > find_len_max)) :
-        #print('tab 3',tab_value,len(chars_v), find_len_min, find_len_max)
         return False
     else :   
-        return True   
-    
-    #원본 소스 수정 22.12.28 문자열길이 체크 삭제
-    # if (tab_value == 1) and (len(chars_v) < find_len_min or 0 > find_len_min or find_len_min > find_len_max or 2 > find_len_min or 6 < find_len_max or len(chars_v) < find_len_max) :
-    #         #print('tab 1',tab_value,len(chars_v), find_len_min, find_len_max)
-    #     return False
-    # elif (tab_value == 3) and (len(chars_v) < find_len_min or 0 > find_len_min or find_len_min > find_len_max or 2 > find_len_min or 6 < find_len_max or len(chars_v) < find_len_max) :
-    #     #print('tab 3',tab_value,len(chars_v), find_len_min, find_len_max)
-    #     return False
-    # else :   
-    #     return True    
+        return True     
 
 # 문자형 숫자 입력 체크  
 def varify_num(find_num) :  
@@ -546,7 +495,6 @@ def varify_num(find_num) :
         if (find_num[vi] < '0' or find_num[vi] > '9') : 
             var_flag = 1
             break  
-    #print('NUM var_flag : ', var_flag)
     if (var_flag == 1 or find_num is None) :    
         return False
     else :   
@@ -571,7 +519,6 @@ def varify_char(find_str,find_tvar) :   # tvar 1 그대로 2 소문자 , 3 대�
                     var_flag = 1
                     break
 
-    # print('char var_flag : ', var_flag, find_tvar)
     if (var_flag == 1) :   
         return False
     else :   
@@ -594,8 +541,7 @@ def varify_special(find_spe) :   # tvar 1 소문자 , 2 대문자 , 3 둘다
         else :
             var_flag = 1
             break
-        
-    #print('spcial var_flag : ', var_flag)
+
     if (var_flag == 1) :   
         return False
     else :   
@@ -605,8 +551,6 @@ def error_msg_clear(tab_value) :
     if (tab_value == 1):   
         lb_hi = Label(tab1, text=" ", bg='gray94', width=40,justify=[RIGHT])  # 파일 존재 
         lb_hi.place(x=150,y=13)
-        # Trials Version length check  2 to 6 allowed  (display Length Wudtg value 15 -> 20 update)
-        # lb_hi = Label(tab1, text=" ", bg='gray94', width=20, height=1,padx=5, pady=5,justify=[RIGHT])  # 길이
         lb_hi = Label(tab1, text="Trials 2~6 allowed  ", fg='red', width=20, height=1,padx=5, pady=5,justify=[RIGHT])
         lb_hi.place(x=500,y=80)  
         lb_hi = Label(tab1, text=" ", bg='gray94', width=15, height=1,padx=5, pady=5,justify=[RIGHT])  # 숫자형
@@ -637,8 +581,6 @@ def error_msg_clear(tab_value) :
     elif (tab_value == 3) :    # tab3에서 왔음  
         lb_hi = Label(tab3, text=" ", bg='gray94', width=40,justify=[RIGHT])  # 파일 존재 
         lb_hi.place(x=150,y=13)
-        # Trials Version length check  2 to 6 allowed  (display Length Wudtg value 15 -> 20 update)
-        # lb_hi = Label(tab3, text=" ", bg='gray94', width=20, height=1,padx=5, pady=5,justify=[RIGHT])  # 길이
         lb_hi = Label(tab3, text="Trials 2~6 allowed  ", fg='red', width=20, height=1,padx=5, pady=5,justify=[RIGHT])
         lb_hi.place(x=500,y=80)  
         lb_hi = Label(tab3, text=" ", bg='gray94', width=15, height=1,padx=5, pady=5,justify=[RIGHT])  # 숫자형
@@ -660,8 +602,6 @@ def chars_create(c_find_number,c_find_string,c_find_special,c_find_var,c_find_ma
     chars_cre = ''
     if ( c_find_number != '') :   
         chars_cre = c_find_number
-
-    # print('Step 1-',chars_cre)
     if ( c_find_string != '' and c_find_var == 1) :   
         chars_cre = chars_cre + c_find_string
     elif ( c_find_string != '' and c_find_var == 2) :   
@@ -671,27 +611,12 @@ def chars_create(c_find_number,c_find_string,c_find_special,c_find_var,c_find_ma
     elif ( c_find_string != '' and c_find_var == 4) :   
         chars_cre = chars_cre + c_find_string.lower() + c_find_string.upper()
 
-    # print('Step 2-',chars_cre)
     if (c_find_special != '') :   
         chars_cre = chars_cre + c_find_special
 
-    # print('Step 3-',chars_cre,c_find_max_length,len(chars_cre))  # 필요 문자열길이 추가
-    # 패스워드 길이에 맞추어 문자열 길이 맞추는 로직 삭제 22.12.28
-    # if (c_find_max_length > len(chars_cre)) :   
-    #     for i in range(len(chars_cre),c_find_max_length) :
-    #         if (c_find_number != '') :
-    #             chars_cre = chars_cre + chars_cre[0]   
-    #         elif (c_find_string != '' and (c_find_var == 1 or c_find_var == 2)) :   
-    #             chars_cre = chars_cre + 'a'
-    #         elif (c_find_string != '' and (c_find_var == 3 or c_find_var == 4)) :   
-    #             chars_cre = chars_cre + 'A'
-    #         elif (c_find_special != '') :   
-    #             chars_cre = chars_cre + '!'
-    #         else :   
-    #             chars_cre = chars_cre + '1'
-    # print('Step 4-',chars_cre)
+  
     chars_cre = ''.join(set(chars_cre))  # set로 변환 후 join 함수사용 중복문자 제거 순서 보정 없음 순저보정시 dict.fromkeys(word) 
-    # print('Step 5-',chars_cre)
+    
     return chars_cre
 
 #백분율 소숫점 3자리까지 문자열 
@@ -724,21 +649,13 @@ def result_confirm_func_tab2(tab_value,password) :
     find_type_var = find_type_var_tab2
     success_flag = 0
 
-    # instance = Dispatch("Excel.Application")  # Excel
-    # instance.Visible = False
-
     if (public_cancel == True) :   
         success_flag = 2              #  진행 취소
     try:   
-        #state_value = instance.Workbooks.Open(Filename=find_name, UpdateLinks=False, ReadOnly=True, Format=None, Password=password) # Excel
         pikepdf.open(find_name, password = password)  #pdf
-        #print("password found: ", password,state_value)
         password_found_display(tab_value,password)
         password_found_end(tab_value) 
-        #now = time.strftime("[%H:%M:%S]")
-        #print("success time :", now) 
         success_flag = 1
-        #instance.Workbooks.close
     except :  
         pass
 
@@ -754,24 +671,13 @@ def result_confirm_func(tab_value,r_find_length_min,r_find_length_max,chars) :
     global find_name_tab3
     global display_cycle_value
 
-    find_name = ''
-    #find_type_var = 1     
+    find_name = ''   
     if (tab_value == 1):   
         find_name = find_name_tab1    # tab1에서 왔음
-        #find_type_var = find_type_var_tab1
     elif (tab_value == 3) :   
         find_name = find_name_tab3    # tab3에서 왔음
-        #find_type_var = find_type_var_tab3
 
     public_cancel = False
-
-    #print('tab',tab_value,' After - f-name:',find_name,' Min:',r_find_length_min,' Max:',r_find_length_max,' chars:',chars,' type:',find_type_var)   
-    #chars = string.ascii_lowercase + string.digits
-    #chars = string.digits
-
-    #chars = '1234'
-    
-    #print('-',chars,'-')
 
     chars_case_num = 0   # 진행 토탈 경우의 수-------
 
@@ -779,9 +685,6 @@ def result_confirm_func(tab_value,r_find_length_min,r_find_length_max,chars) :
         count_allpass = product(chars,repeat=t_i)  
         chars_case_num = chars_case_num+ len(list(count_allpass))
 
-    #print('tab',tab_value,' 진행율 토탈 케이스',chars_case_num)
-
-    #lb_hi = Label(tab1, text="Preparing and calculating processing time...............", fg='blue',width=48, height=1, justify=[RIGHT])
     if (tab_value == 1):
         lb_hi = Label(tab1, text="Number of cases MAX : "+str(format(chars_case_num,',')), fg='blue',width=48, height=1, justify=[LEFT])
         lb_hi.place(x=150,y=390)
@@ -792,10 +695,6 @@ def result_confirm_func(tab_value,r_find_length_min,r_find_length_max,chars) :
     chars_case_num_count = 0
 
     now = time.strftime("[%H:%M:%S]")
-    #print('tab',tab_value,' start time :', now)
-
-    # instance = Dispatch("Excel.Application")  # Excel
-    # instance.Visible = False
 
     success_flag = 0
 
@@ -825,30 +724,16 @@ def result_confirm_func(tab_value,r_find_length_min,r_find_length_max,chars) :
                     progressbar.place(x=150,y=305)
                     p_var.set(chars_case_num_count)          # progress 진행값
                     progressbar.update()  # ui없데이트
-                
-
-            # if password == '1234' :   
-            #     print('---------------------------------',password,find_name)
-            # else :   
-            #     print (chars_case_num_count, password)
-            # if (tab_value == 3):   
-            #     print('tab',tab_value,' 진행율 ing : ',chars_case_num_count, chars_case_num, 
-            #           int(chars_case_num_count/chars_case_num*100), p_var.get(),'-',find_name,'-',password,public_cancel)
-            
+                 
             if (public_cancel == True) :   
                 success_flag = 2   #  진행 취소
                 break
 
             try:   
-                #state_value = instance.Workbooks.Open(Filename=find_name, UpdateLinks=False, ReadOnly=True, Format=None, Password=password) # Excel
                 pikepdf.open(find_name, password = password)  #pdf
-                #print("password found: ", password,state_value)
                 password_found_display(tab_value,password)
                 password_found_end(tab_value) 
-                #now = time.strftime("[%H:%M:%S]")
-                #print("success time :", now) 
                 success_flag = 1
-                #instance.Workbooks.close
                 break
             except :  
                 continue  
@@ -889,13 +774,9 @@ def file_password_check1(tab_value) :
     elif (tab_value == 3) :   
         find_name = find_name_tab3    # tab3에서 왔음
 
-    # instance = Dispatch("Excel.Application")  # Excel
-    # instance.Visible = False
     flag_check = True
     try:   
-        #instance.Workbooks.Open(Filename=find_name, UpdateLinks=False, ReadOnly=True, Format=None, Password="1") # Excel
         pikepdf.open(find_name, password = "1")  #pdf
-        #instance.Workbooks.close
         flag_check = True
     except :  
         flag_check = False
@@ -914,14 +795,10 @@ def file_password_check2(tab_value) :
         find_name = find_name_tab2    # tab2에서 왔음
     elif (tab_value == 3) :   
         find_name = find_name_tab3    # tab3에서 왔음
-    
-    # instance = Dispatch("Excel.Application")  # Excel
-    # instance.Visible = False
+
     flag_check = True
     try:   
-        #instance.Workbooks.Open(Filename=find_name, UpdateLinks=False, ReadOnly=True, Format=None, Password="2") # Excel
         pikepdf.open(find_name, password = "2")  #pdf
-        #instance.Workbooks.close
         flag_check = True
     except :  
         flag_check = False
@@ -939,14 +816,9 @@ font10=tkinter.font.Font(family="맑은 고딕", size=10)
 font8=tkinter.font.Font(family="맑은 고딕", size=8)
 
 window.title("  PDF Password Found")
-# notebook = window.geometry("640x480")
 notebook=tkinter.ttk.Notebook(window, width=640, height=480)   # 크기 지정
 window.resizable(False, False)
 cur_dir = os.getcwd()   # 현재 Director
-# print("------------",cur_dir,"-----------")
-# icon_file = PhotoImage(file = cur_dir+'/gui/haraminfo_logo.png')
-# icon_file = PhotoImage(file = cur_dir+'/gui/pdf_pw_logo.png')
-# window.iconphoto(False, icon_file)  # Setting icon of master window
 
 tab1=Frame(window)
 notebook.add(tab1, text="   Combination   ")
@@ -993,11 +865,8 @@ lb_hi.place(x=30,y=40)
 lb_hi = Label(tab1, text=find_name_tab1, fg="gray1", bg="gray96", width=48,height=1,padx=5, pady=5,justify=[RIGHT])  # 파일명
 lb_hi.place(x=150,y=40)
 
-#print('tab 1 before button 대상 파일 : ',find_name_tab1,'-',find_name_tab2,'-',find_name_tab3)
-
 Select_button_tab1 = Button(tab1, text= " Select file ",command=file_find_fun_tab1)   # File Search Function 기능 구현
 Select_button_tab1.place(x=520, y=40)
-#print('tab 1 after button 대상 파일 : ',find_name_tab1,'-',find_name_tab2,'-',find_name_tab3)
   
 # Password Length  입력
 lb_hi = Label(tab1, text="Password Length", bg='gray93', fg='gray1',width=15, height=1,padx=5, pady=5, justify=[RIGHT])
@@ -1017,7 +886,6 @@ entry_length_max_tab1.pack(side=tk.LEFT,padx=10,pady=5)
 entry_length_max_tab1.place(x=270,y=80,width=70,height=30)
 lb_hi = Label(tab1, text=" ", bg='gray94', width=15, height=1,padx=5, pady=5,justify=[RIGHT])
 lb_hi.place(x=350,y=80)
-#print('tab 1 패스워드 길이 Min : ',find_length_min_tab1, ' ~ Max : ',find_length_max_tab1)
 
 # password combination 입력
 lb_hi = Label(tab1, text="PW Combination ", bg='gray93', fg='gray1',width=15, height=1,padx=5, pady=5, justify=[RIGHT])
@@ -1030,7 +898,6 @@ find_number_tab1=''              # 찾고자하는 숫자형 선택 맥스 4개�
 entry_number_tab1.insert(0,find_number_tab1)
 entry_number_tab1.pack(side=tk.LEFT)
 entry_number_tab1.place(x=240,y=120,width=260,height=30)
-#print('tab 1 패스워드 가능 (숫자형) 문자열 : ',find_number_tab1)
 
 # password combination 문자형 입력
 lb_hi = Label(tab1, text=" Char  ", bg='gray90', fg='gray1',width=8, height=1,padx=5, pady=5, justify=[CENTER])
@@ -1040,7 +907,6 @@ find_string_tab1=''              # 찾고자하는 문자형 선택 맥스 4개�
 entry_string_tab1.insert(0,find_string_tab1)
 entry_string_tab1.pack(side=tk.LEFT)
 entry_string_tab1.place(x=240,y=160,width=260,height=30)
-#print('tab 1 패스워드 가능 (문자형) 문자열 : ',find_string_tab1)
 
 find_type_var_tab1 = IntVar()  # 여기에 int형으로 값을 저장한다
 btn_find_type_var1_tab1=Radiobutton(tab1,text="Ignore",value=1, variable=find_type_var_tab1)
@@ -1057,7 +923,6 @@ btn_find_type_var3_tab1.pack()
 btn_find_type_var3_tab1.place(x=375,y=190)
 btn_find_type_var4_tab1.pack()
 btn_find_type_var4_tab1.place(x=445,y=190)
-#print('tab 1 소문자, 대문자, 둘다 ', find_type_var_tab1)
 
 # password combination 특수문자 입력
 lb_hi = Label(tab1, text="Special", bg='gray90', fg='gray1',width=8, height=1,padx=5, pady=5, justify=[CENTER])
@@ -1067,7 +932,6 @@ find_special_tab1=''              # 찾고자하는 특수문자형 선택 맥�
 entry_special_tab1.insert(0,find_special_tab1)
 entry_special_tab1.pack(side=tk.LEFT)
 entry_special_tab1.place(x=240,y=220,width=260,height=30)
-#print('tab 1 패스워드 가능 (특수문자) 문자열 : ',find_special_tab1)
 
 # Description password Search Display
 lb_hi = Label(tab1, text="Description    ", bg='gray93', fg='gray1',width=15, height=1,padx=5, pady=5, justify=[RIGHT])
@@ -1104,7 +968,6 @@ lb_hi.place(x=150,y=40)
 
 Select_button_tab2 = Button(tab2, text= " Select file ",command=file_find_fun_tab2)   # File Search Function 기능 구현
 Select_button_tab2.place(x=520, y=40)
-#print('tab 2 after button 대상 파일 : ',find_name_tab1,'-',find_name_tab2,'-',find_name_tab3)
 
 # PW Text File 선택
 find_type_var_tab2 = IntVar()  # 여기에 int형으로 값을 저장한다
@@ -1118,19 +981,13 @@ btn_find_type_var2_tab2.pack()
 btn_find_type_var2_tab2.place(x=40,y=120)
 text_input_flag = find_type_var_tab2.get()
 
-#print('tab 2 PW file, Input ', find_type_var_tab2, find_type_var_tab2.get(),text_input_flag)
-
  # Text File 명 Display   
 lb_hi = Label(tab2, text=find_text_tab2, fg="gray1", bg="gray96", width=48,height=1,padx=5, pady=5,justify=[RIGHT])  # 파일명
 lb_hi.place(x=150,y=80)
 
-#print('tab 2 before button TEXT 대상 파일 : ',find_text_tab2)
-
 # Default Text File 선택
 Select_button_tab2 = Button(tab2, text= " Select file ",state = NORMAL,command=text_find_fun_tab2)  
 Select_button_tab2.place(x=520, y=80)
-
-#print('tab 2 after button TEXT 대상 파일 : ',find_text_tab2)
 
 # Input Clear button
 clear_button_tab2 = Button(tab2, text= " Input Clear ",padx=0, pady=2,state = DISABLED,command=input_clear_fun_tab2,font=font8)  
@@ -1142,9 +999,7 @@ textsave_button_tab2.place(x=520, y=150)
 
 # ScrollText List Box PW Data Input  Default : Non-active
 text_area=ScrolledText(tab2,width=48,height=9,x=150,y=120,bg='gray91',padx=5, pady=5,state=NORMAL)
-#text_area.grid(row=10,column=10,columnspan=3)
 text_area.place(x=150,y=120)
-#text_area.focus_set()
 # text.bind('<Return>',flist)  #Enter 이벤트시 Flist Function 실행
 
 # Description password Search Display
@@ -1179,12 +1034,9 @@ lb_hi.place(x=30,y=40)
 lb_hi = Label(tab3, text=find_name_tab3, fg="gray1", bg="gray96", width=48,height=1,padx=5, pady=5,justify=[RIGHT])  # 파일명
 lb_hi.place(x=150,y=40)
 
-#print('tab 3 before button 대상 파일 : ',find_name_tab1,'-',find_name_tab2,'-',find_name_tab3)
-
 Select_button_tab3 = Button(tab3, text= " Select file ",command=file_find_fun_tab3)   # File Search Function 기능 구현
 Select_button_tab3.place(x=520, y=40)
-#print('tab 3 after button 대상 파일 : ',find_name_tab1,'-',find_name_tab2,'-',find_name_tab3)
-  
+ 
 # Password Length  입력
 lb_hi = Label(tab3, text="Password Length", bg='gray93', fg='gray1',width=15, height=1,padx=5, pady=5, justify=[RIGHT])
 lb_hi.place(x=30,y=80)
@@ -1203,7 +1055,6 @@ entry_length_max_tab3.pack(side=tk.LEFT,padx=10,pady=5)
 entry_length_max_tab3.place(x=270,y=80,width=70,height=30)
 lb_hi = Label(tab3, text=" ", bg='gray94', width=15, height=1,padx=5, pady=5,justify=[RIGHT])
 lb_hi.place(x=350,y=80)
-#print('tap 3 패스워드 길이 Min : ',find_length_min_tab3, ' ~ Max : ',find_length_max_tab3)
 
 # password combination 입력
 lb_hi = Label(tab3, text="PW Combination ", bg='gray93', fg='gray1',width=15, height=1,padx=5, pady=5, justify=[RIGHT])
@@ -1216,7 +1067,6 @@ find_number_tab3='0123456789'              # 찾고자하는 숫자형 선택 �
 entry_number_tab3.insert(0,find_number_tab3)
 entry_number_tab3.pack(side=tk.LEFT)
 entry_number_tab3.place(x=240,y=120,width=260,height=30)
-#print('tab 3 패스워드 가능 (숫자형) 문자열 : ',find_number_tab3)
 
 # password combination 문자형 입력
 lb_hi = Label(tab3, text=" Char  ", bg='gray90', fg='gray1',width=8, height=1,padx=5, pady=5, justify=[CENTER])
@@ -1226,7 +1076,6 @@ find_string_tab3='abcdefghijklmnopqrstuvwxyz'              # 찾고자하는 문
 entry_string_tab3.insert(0,find_string_tab3)
 entry_string_tab3.pack(side=tk.LEFT)
 entry_string_tab3.place(x=240,y=160,width=260,height=30)
-#print('tab 3 패스워드 가능 (문자형) 문자열 : ',find_string_tab3)
 
 find_type_var_tab3 = IntVar()  # 여기에 int형으로 값을 저장한다
 btn_find_type_var1_tab3=Radiobutton(tab3,text="Ignore",value=1, variable=find_type_var_tab3)
@@ -1243,7 +1092,6 @@ btn_find_type_var3_tab3.pack()
 btn_find_type_var3_tab3.place(x=375,y=190)
 btn_find_type_var4_tab3.pack()
 btn_find_type_var4_tab3.place(x=445,y=190)
-#print('tab 3소문자, 대문자, 둘다 ', find_type_var_tab3)
 
 # password combination 특수문자 입력
 lb_hi = Label(tab3, text="Special", bg='gray90', fg='gray1',width=8, height=1,padx=5, pady=5, justify=[CENTER])
@@ -1253,7 +1101,6 @@ find_special_tab3='!@#$%^&*()_+-=[]\{}|;:,./<>?'              # 찾고자하는 
 entry_special_tab3.insert(0,find_special_tab3)
 entry_special_tab3.pack(side=tk.LEFT)
 entry_special_tab3.place(x=240,y=220,width=260,height=30)
-#print('tab 3 패스워드 가능 (특수문자) 문자열 : ',find_special_tab3)
 
 # Description password Search Display
 lb_hi = Label(tab3, text="Description    ", bg='gray93', fg='gray1',width=15, height=1,padx=5, pady=5, justify=[RIGHT])
